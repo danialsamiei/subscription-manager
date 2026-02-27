@@ -96,7 +96,7 @@ export default function SubscriptionModal({
     
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-      alert('Please fill in all required fields.');
+      alert('لطفا تمام فیلدهای ضروری را پر کنید.');
       return;
     }
     
@@ -138,7 +138,7 @@ export default function SubscriptionModal({
   const formatDate = (date: Date | null) => {
     return date
       ? date.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })
-      : 'Select billing date';
+      : 'تاریخ صورتحساب را انتخاب کنید';
   };
 
   return (
@@ -150,34 +150,34 @@ export default function SubscriptionModal({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <h2>{id ? 'Edit Subscription' : 'Add New Subscription'}</h2>
-        <p>Enter the details of your subscription</p>
+        <h2>{id ? 'ویرایش اشتراک' : 'افزودن اشتراک جدید'}</h2>
+        <p>اطلاعات اشتراک خود را وارد کنید</p>
         <form onSubmit={handleSubmit} className={styles.modalForm}>
           <div className={styles.formGroup}>
-            <label htmlFor="name">Subscription Name <span style={{ color: '#ff4444' }}>*</span></label>
+            <label htmlFor="name">نام اشتراک <span style={{ color: '#ff4444' }}>*</span></label>
             <input
               id="name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Enter subscription name"
+              placeholder="نام اشتراک را وارد کنید"
               style={errors.name ? { border: '1px solid #ff4444', boxShadow: '0 0 5px rgba(255, 68, 68, 0.3)' } : {}}
             />
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="amount">Recurring Amount <span style={{ color: '#ff4444' }}>*</span></label>
+            <label htmlFor="amount">مبلغ دوره‌ای <span style={{ color: '#ff4444' }}>*</span></label>
             <input
               id="amount"
               type="number"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              placeholder="Enter amount"
+              placeholder="مبلغ را وارد کنید"
               step="0.01"
               style={errors.amount ? { border: '1px solid #ff4444', boxShadow: '0 0 5px rgba(255, 68, 68, 0.3)' } : {}}
             />
           </div>
           <div className={`${styles.formGroup} ${styles.datePickerGroup}`}>
-            <label htmlFor="dueDate">Billing Date</label>
+            <label htmlFor="dueDate">تاریخ صورتحساب</label>
             <DatePicker
               id="dueDate"
               selected={dueDate}
@@ -197,14 +197,14 @@ export default function SubscriptionModal({
             />
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="icon">Icon <span style={{ color: '#ff4444' }}>*</span></label>
+            <label htmlFor="icon">آیکون <span style={{ color: '#ff4444' }}>*</span></label>
             <div className={styles.iconInputContainer}>
               <input
                 id="icon"
                 type="text"
                 value={iconInput}
                 onChange={handleIconChange}
-                placeholder="Enter Material Design Icon name"
+                placeholder="نام آیکون Material Design را وارد کنید"
                 style={errors.icon ? { border: '1px solid #ff4444', boxShadow: '0 0 5px rgba(255, 68, 68, 0.3)' } : {}}
               />
               <span className={styles.iconPreview}>
@@ -213,7 +213,7 @@ export default function SubscriptionModal({
             </div>
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="interval">Recurrence Interval</label>
+            <label htmlFor="interval">دوره تکرار</label>
             <div className={styles.intervalInputContainer}>
               <input
                 id="intervalValue"
@@ -228,25 +228,25 @@ export default function SubscriptionModal({
                 value={intervalUnit}
                 onChange={(e) => setIntervalUnit(e.target.value)}
               >
-                <option value="days">Days</option>
-                <option value="weeks">Weeks</option>
-                <option value="months">Months</option>
-                <option value="years">Years</option>
+                <option value="days">روز</option>
+                <option value="weeks">هفته</option>
+                <option value="months">ماه</option>
+                <option value="years">سال</option>
               </select>
             </div>
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="account">Payment Account</label>
+            <label htmlFor="account">حساب پرداخت</label>
             <input
               id="account"
               type="text"
               value={account}
               onChange={(e) => setAccount(e.target.value)}
-              placeholder="Enter account or card name"
+              placeholder="نام حساب یا کارت را وارد کنید"
             />
           </div>
           <div className={`${styles.formGroup} ${styles.autopayToggle}`}>
-            <label htmlFor="autopay">Autopay</label>
+            <label htmlFor="autopay">پرداخت خودکار</label>
             <label className={styles.switch}>
               <input
                 id="autopay"
@@ -258,7 +258,7 @@ export default function SubscriptionModal({
             </label>
           </div>
           <div className={`${styles.formGroup} ${styles.notifyToggle}`}>
-            <label htmlFor="notify">Notify</label>
+            <label htmlFor="notify">اعلان</label>
             <label className={styles.switch}>
               <input
                 id="notify"
@@ -270,7 +270,7 @@ export default function SubscriptionModal({
             </label>
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="currency">Currency</label>
+            <label htmlFor="currency">ارز</label>
             <select
               id="currency"
               value={currency}
@@ -284,13 +284,13 @@ export default function SubscriptionModal({
             </select>
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="tags">Tags (comma separated)</label>
+            <label htmlFor="tags">برچسب‌ها (جدا شده با کاما)</label>
             <input
               id="tags"
               type="text"
               value={tagInput}
               onChange={handleTagChange}
-              placeholder="e.g. streaming, entertainment, monthly"
+              placeholder="مثلا: استریم، سرگرمی، ماهانه"
             />
             {tags.length > 0 && (
               <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '8px', gap: '4px' }}>
@@ -310,10 +310,10 @@ export default function SubscriptionModal({
           </div>
           <div className={styles.modalActions}>
             <button type="submit" className={styles.submitButton}>
-              {id ? 'Update Subscription' : 'Add Subscription'}
+              {id ? 'بروزرسانی اشتراک' : 'افزودن اشتراک'}
             </button>
             <button type="button" onClick={onClose} className={styles.cancelButton}>
-              Cancel
+              لغو
             </button>
           </div>
         </form>

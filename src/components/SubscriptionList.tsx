@@ -284,18 +284,18 @@ export default function SubscriptionList({
   return (
     <Container>
       <Header>
-        <Title>Subscriptions List</Title>
+        <Title>لیست اشتراک‌ها</Title>
         <Controls>
-          <label htmlFor="sort-select">Sort by: </label>
+          <label htmlFor="sort-select">مرتب‌سازی: </label>
           <Select
             id="sort-select"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
           >
-            <option value="dueDate">Due Date</option>
-            <option value="creditCard">Credit Card</option>
-            <option value="amount">Amount</option>
-            <option value="tags">Tags</option>
+            <option value="dueDate">تاریخ سررسید</option>
+            <option value="creditCard">کارت بانکی</option>
+            <option value="amount">مبلغ</option>
+            <option value="tags">برچسب‌ها</option>
           </Select>
         </Controls>
       </Header>
@@ -330,7 +330,7 @@ export default function SubscriptionList({
               }}
             >
               <Icon icon="mdi:close" style={{ marginRight: '4px' }} />
-              Clear All
+              پاک کردن همه
             </Badge>
           )}
           {allTags.map((tag, index) => (
@@ -425,7 +425,7 @@ export default function SubscriptionList({
                 <ItemDetails>
                   <div style={{ display: 'flex', alignItems: 'center', width: '100%', marginBottom: '5px' }}>
                     <Icon icon="mdi:credit-card" style={{ marginRight: '5px', color: '#45B7D1' }} />
-                    <span style={{ color: '#ccc' }}>{sub.account || 'Not Specified'}</span>
+                    <span style={{ color: '#ccc' }}>{sub.account || 'مشخص نشده'}</span>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', marginTop: '5px' }}>
                     <Badge style={{
@@ -446,7 +446,7 @@ export default function SubscriptionList({
                         if (nextDueDate) {
                           return format(nextDueDate, 'MMM d, yyyy');
                         } else {
-                          return 'No due date';
+                          return 'بدون سررسید';
                         }
                       })()}
                     </Badge>
@@ -464,7 +464,7 @@ export default function SubscriptionList({
                         color: '#45B7D1'
                       }}>
                         <Icon icon="mdi:auto-pay" style={{ marginRight: '3px' }} />
-                        Autopay
+                        پرداخت خودکار
                       </Badge>
                     )}
                     {Boolean(sub.notify) && (
@@ -481,7 +481,7 @@ export default function SubscriptionList({
                         color: '#fffd6b'
                       }}>
                         <Icon icon="mdi:bell" style={{ marginRight: '3px' }} />
-                        Notify
+                        اعلان
                       </Badge>
                     )}
                   </div>
@@ -515,9 +515,9 @@ export default function SubscriptionList({
                   )}
                 </ItemDetails>
                 <ItemActions>
-                  <Button onClick={() => onEdit(sub)}>Edit</Button>
+                  <Button onClick={() => onEdit(sub)}>ویرایش</Button>
                   <Button variant="delete" onClick={() => onDelete(sub.id!)}>
-                    Delete
+                    حذف
                   </Button>
                 </ItemActions>
               </Item>

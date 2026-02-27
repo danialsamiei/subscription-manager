@@ -15,7 +15,7 @@ const Title = styled.h1`
 export default function Header() {
   return (
     <HeaderContainer>
-      <Title>Subscription Manager</Title>
+      <Title>مدیریت اشتراک‌ها</Title>
     </HeaderContainer>
   );
 } 

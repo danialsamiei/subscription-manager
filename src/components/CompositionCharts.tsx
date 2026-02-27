@@ -47,14 +47,14 @@ const CompositionCharts: React.FC<CompositionChartsProps> = ({ subscriptions, cu
             if (monthlyCost === 0) return;
 
             // Categories (First tag)
-            let category = 'Uncategorized';
+            let category = 'بدون دسته‌بندی';
             if (sub.tags && sub.tags.length > 0) {
                 category = sub.tags[0];
             }
             catMap.set(category, (catMap.get(category) || 0) + monthlyCost);
 
             // Payment Method
-            const payment = sub.account || 'Unspecified';
+            const payment = sub.account || 'مشخص نشده';
             payMap.set(payment, (payMap.get(payment) || 0) + monthlyCost);
         });
 
@@ -78,7 +78,7 @@ const CompositionCharts: React.FC<CompositionChartsProps> = ({ subscriptions, cu
                 <div className={styles.customTooltip}>
                     <p className={styles.tooltipLabel}>{data.name}</p>
                     <p className={styles.tooltipValue}>
-                        {symbol}{data.value.toFixed(2)} / mo
+                        {symbol}{data.value.toFixed(2)} / ماه
                     </p>
                     <p style={{ color: '#aaa', fontSize: '0.8em' }}>
                         {((data.payload.percent || 0) * 100).toFixed(0)}%
@@ -92,7 +92,7 @@ const CompositionCharts: React.FC<CompositionChartsProps> = ({ subscriptions, cu
     const renderChart = (title: string, data: any[]) => (
         <div className={styles.chartCard} style={{ flex: 1, minWidth: '300px' }}>
             <div className={styles.title}>{title}</div>
-            <div className={styles.subtitle}>Monthly Cost Distribution</div>
+            <div className={styles.subtitle}>توزیع هزینه ماهانه</div>
             <div style={{ width: '100%', height: 300 }}>
                 <ResponsiveContainer>
                     <PieChart>
@@ -120,8 +120,8 @@ const CompositionCharts: React.FC<CompositionChartsProps> = ({ subscriptions, cu
 
     return (
         <div className={styles.pieChartsWrapper}>
-            {renderChart("Spend by Category", categoryData)}
-            {renderChart("Spend by Method", paymentData)}
+            {renderChart("هزینه بر اساس دسته‌بندی", categoryData)}
+            {renderChart("هزینه بر اساس روش پرداخت", paymentData)}
         </div>
     );
 };

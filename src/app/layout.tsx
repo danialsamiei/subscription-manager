@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Poppins, Montserrat } from 'next/font/google';
 import StyledComponentsRegistry from '@/lib/registry';
+import SessionProvider from '@/lib/SessionProvider';
 import './globals.css';
 
 const poppins = Poppins({ 
@@ -18,8 +19,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: 'Subscription Manager',
-  description: 'Manage your subscriptions in one place',
+  title: 'مدیریت اشتراک‌ها و دامنه‌ها',
+  description: 'سابکوریست - مدیریت یکپارچه اشتراک‌ها، دامنه‌ها و سرویس‌های ابری Orcest AI',
   icons: {
     icon: [
       { url: '/favicon.ico' },
@@ -45,7 +46,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="fa" dir="rtl">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
@@ -53,9 +54,11 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/logo192.png" />
       </head>
       <body className={`${poppins.variable} ${montserrat.variable}`}>
-        <StyledComponentsRegistry>
-          {children}
-        </StyledComponentsRegistry>
+        <SessionProvider session={null}>
+          <StyledComponentsRegistry>
+            {children}
+          </StyledComponentsRegistry>
+        </SessionProvider>
       </body>
     </html>
   );

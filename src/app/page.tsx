@@ -13,6 +13,8 @@ import { faCog } from '@fortawesome/free-solid-svg-icons';
 import ConfigurationModal from '@/components/ConfigurationModal';
 import CostTrendGraph from '@/components/CostTrendGraph';
 import CompositionCharts from '@/components/CompositionCharts';
+import UserBar from '@/components/UserBar';
+import Link from 'next/link';
 
 export default function Home() {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
@@ -59,7 +61,7 @@ export default function Home() {
         setNtfySettings(ntfy);
       } catch (error) {
         console.error('Error initializing app:', error);
-        alert('Failed to initialize the application. Please refresh the page.');
+        alert('خطا در بارگذاری برنامه. لطفا صفحه را رفرش کنید.');
       } finally {
         setIsLoading(false);
       }
@@ -107,12 +109,12 @@ export default function Home() {
       );
     } catch (error) {
       console.error('Error saving subscription:', error);
-      alert('Failed to save subscription. Please try again.');
+      alert('خطا در ذخیره اشتراک. لطفا دوباره تلاش کنید.');
     }
   };
 
   const handleDeleteSubscription = async (id: number) => {
-    if (!confirm('Are you sure you want to delete this subscription?')) {
+    if (!confirm('آیا از حذف این اشتراک مطمئن هستید؟')) {
       return;
     }
 
@@ -128,7 +130,7 @@ export default function Home() {
       setSubscriptions(prev => prev.filter(sub => sub.id !== id));
     } catch (error) {
       console.error('Error deleting subscription:', error);
-      alert('Failed to delete subscription. Please try again.');
+      alert('خطا در حذف اشتراک. لطفا دوباره تلاش کنید.');
     }
   };
 
@@ -225,14 +227,14 @@ export default function Home() {
           // Update the state with the saved subscriptions that now have database IDs
           setSubscriptions(savedSubscriptions);
 
-          alert(`Successfully imported ${savedSubscriptions.length} subscriptions.`);
+          alert(`${savedSubscriptions.length} اشتراک با موفقیت وارد شد.`);
         } catch (error) {
           console.error('Error in Promise.all:', error);
-          alert('Some subscriptions failed to import. Check console for details.');
+          alert('برخی اشتراک‌ها وارد نشدند. کنسول را بررسی کنید.');
         }
       } catch (error) {
         console.error('Error importing subscriptions:', error);
-        alert('Failed to import subscriptions. Please check the file format.');
+        alert('خطا در وارد کردن اشتراک‌ها. فرمت فایل را بررسی کنید.');
       }
     };
     reader.readAsText(file);
@@ -279,7 +281,7 @@ export default function Home() {
       setIsConfigModalOpen(false);
     } catch (error) {
       console.error('Error saving configuration:', error);
-      alert('Failed to save configuration. Please try again.');
+      alert('خطا در ذخیره تنظیمات. لطفا دوباره تلاش کنید.');
     }
   };
 
@@ -289,7 +291,7 @@ export default function Home() {
         <Header />
         <div className="content-container">
           <div style={{ textAlign: 'center', marginTop: '2rem', color: '#fff' }}>
-            Loading...
+            در حال بارگذاری...
           </div>
         </div>
       </div>
@@ -298,16 +300,20 @@ export default function Home() {
 
   return (
     <div className="app">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.5rem 0' }}>
+        <span style={{ fontSize: '0.75rem', color: '#666', fontFamily: 'monospace' }}>subcorist — orcest.ai</span>
+        <UserBar />
+      </div>
       <div className="app-header">
-        <h1 className="app-title">Subscription Manager</h1>
+        <h1 className="app-title">مدیریت اشتراک‌ها</h1>
         <div className="header-actions">
-          {/* Export Button */}
-          <button className="export-button" onClick={handleExport} data-label="Export">
+          {/* دکمه خروجی */}
+          <button className="export-button" onClick={handleExport} data-label="خروجی">
             <Icon icon="mdi:download" className="export-icon" />
           </button>
 
-          {/* Import Button */}
-          <label className="import-button" data-label="Import">
+          {/* دکمه ورودی */}
+          <label className="import-button" data-label="ورودی">
             <Icon icon="mdi:upload" className="import-icon" />
             <input
               type="file"
@@ -317,11 +323,19 @@ export default function Home() {
             />
           </label>
 
-          {/* Configuration Button */}
+          {/* دکمه ردیاب دامنه و سرویس */}
+          <Link href="/providers" style={{ textDecoration: 'none' }}>
+            <button className="config-button" data-label="دامنه‌ها" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Icon icon="mdi:earth" />
+              دامنه‌ها و سرویس‌ها
+            </button>
+          </Link>
+
+          {/* دکمه تنظیمات */}
           <button
             className="config-button"
             onClick={() => setIsConfigModalOpen(true)}
-            data-label="Settings"
+            data-label="تنظیمات"
           >
             <FontAwesomeIcon icon={faCog} />
           </button>

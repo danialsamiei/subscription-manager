@@ -133,7 +133,7 @@ function Totals({ subscriptions, currency, showCurrencySymbol, selectedTags, sel
   const accountTotals = subscriptions.reduce<AccountTotals>((acc, sub) => {
     if (sub.included === false) return acc;
 
-    const account = sub.account || 'Unspecified';
+    const account = sub.account || 'مشخص نشده';
     // Use the subscription's currency directly
     const subCurrency = sub.currency || defaultCurrency;
 
@@ -188,7 +188,7 @@ function Totals({ subscriptions, currency, showCurrencySymbol, selectedTags, sel
   return (
     <div className="totals">
       <h2>
-        Summary
+        خلاصه
         {selectedTags && selectedTags.length > 0 && (
           <div style={{
             display: 'flex',
@@ -226,7 +226,7 @@ function Totals({ subscriptions, currency, showCurrencySymbol, selectedTags, sel
             className={`total-card ${period}ly ${selectedPeriod === period ? 'selected' : ''}`}
             onClick={() => handlePeriodClick(period)}
           >
-            <h3>{period.charAt(0).toUpperCase() + period.slice(1)}ly</h3>
+            <h3>{period === 'week' ? 'هفتگی' : period === 'month' ? 'ماهانه' : 'سالانه'}</h3>
             {calculateTotal(period).map((total, index) => (
               <p key={index}>{total}</p>
             ))}
@@ -235,7 +235,7 @@ function Totals({ subscriptions, currency, showCurrencySymbol, selectedTags, sel
       </div>
 
       <h2 className="detail-summaries-title">
-        Detail Summaries <span className={`period-badge ${selectedPeriod}`}>{selectedPeriod}</span>
+        جزئیات خلاصه <span className={`period-badge ${selectedPeriod}`}>{selectedPeriod}</span>
       </h2>
       <div className="account-totals-grid">
         {Object.entries(accountTotals).map(([account, currencies], index) => (

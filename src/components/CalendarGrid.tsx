@@ -27,7 +27,7 @@ function CalendarGrid({ subscriptions, onDateClick, currentDate }: CalendarGridP
   const daysInMonth = getDaysInMonth(year, month);
   const firstDayOfMonth = getFirstDayOfMonth(year, month);
 
-  const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const daysOfWeek = ['یک', 'دو', 'سه', 'چهار', 'پنج', 'جمعه', 'شنبه'];
 
   // Map subscriptions by date
   const subscriptionsByDate: { [key: number]: CalendarSubscription[] } = {};

@@ -173,7 +173,7 @@ const CostTrendGraph: React.FC<CostTrendGraphProps> = ({
     return (
         <div className={styles.chartCard}>
             <div className={styles.title}>
-                Total Cost Trend ({selectedPeriod === 'year' ? 'Yearly' : selectedPeriod === 'week' ? 'Weekly' : 'Monthly'})
+                روند هزینه کل ({selectedPeriod === 'year' ? 'سالانه' : selectedPeriod === 'week' ? 'هفتگی' : 'ماهانه'})
             </div>
             <div className={styles.graphWrapper}>
                 <ResponsiveContainer width="100%" height="100%">
