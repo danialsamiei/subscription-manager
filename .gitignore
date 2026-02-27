@@ -42,3 +42,5 @@ data
 .next
 
 .claude
+
+tsconfig.tsbuildinfo
