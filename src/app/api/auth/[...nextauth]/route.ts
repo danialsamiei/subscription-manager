@@ -1,13 +1,16 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
 
 // Orcest AI SSO - OIDC Provider (Authentik at login.orcest.ai)
+// Uses LOGIN_SSO_URL from Render env group (orcest-ai-shared-apis)
+const SSO_BASE = process.env.LOGIN_SSO_URL || process.env.ORCEST_SSO_ISSUER || 'https://login.orcest.ai';
+
 export const authOptions: NextAuthOptions = {
   providers: [
     {
       id: 'orcest-sso',
       name: 'Orcest AI SSO',
       type: 'oauth',
-      wellKnown: `${process.env.ORCEST_SSO_ISSUER || 'https://login.orcest.ai/application/o/subcorist'}/.well-known/openid-configuration`,
+      wellKnown: `${SSO_BASE}/application/o/subcorist/.well-known/openid-configuration`,
       clientId: process.env.ORCEST_SSO_CLIENT_ID || 'subcorist',
       clientSecret: process.env.ORCEST_SSO_CLIENT_SECRET || '',
       authorization: {
