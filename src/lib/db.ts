@@ -229,6 +229,9 @@ async function seedDefaultProviders(db: any) {
     { name: 'Render', type: 'render', icon: 'mdi:server-network', color: '#46E3B7', api_endpoint: 'https://api.render.com/v1', auth_method: 'api_key' },
     { name: 'Slack', type: 'slack', icon: 'simple-icons:slack', color: '#4A154B', api_endpoint: 'https://slack.com/api', auth_method: 'api_key' },
     { name: 'Titan Mail', type: 'titanmail', icon: 'mdi:email', color: '#1E88E5', api_endpoint: 'https://titan.email', auth_method: 'login_2fa' },
+
+    // ERP & Business
+    { name: 'Orcest Odoo', type: 'odoo', icon: 'mdi:office-building', color: '#8E24AA', api_endpoint: 'https://do.orcest.ai', auth_method: 'login_2fa' },
   ];
 
   for (const p of providers) {

@@ -188,6 +188,12 @@ const credentialFields: Record<string, Array<{ key: string; label: string; type:
   render: [{ key: 'api_key', label: 'Render API Key', type: 'api_key' }],
   slack: [{ key: 'api_key', label: 'Slack Bot Token', type: 'api_key' }],
   titanmail: defaultLoginFields,
+
+  // ERP & Business
+  odoo: [
+    { key: 'username', label: 'نام کاربری Odoo', type: 'email' },
+    { key: 'password', label: 'رمز عبور Odoo', type: 'password' },
+  ],
 };
 
 interface Props {

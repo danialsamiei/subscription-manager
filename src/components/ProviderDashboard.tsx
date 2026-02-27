@@ -10,6 +10,7 @@ import ServiceSubscriptionTable from './ServiceSubscriptionTable';
 import ProviderConfigModal from './ProviderConfigModal';
 import AddDomainModal from './AddDomainModal';
 import AddServiceSubModal from './AddServiceSubModal';
+import OdooSyncPanel from './OdooSyncPanel';
 import { formatToman } from '@/lib/currencyUtils';
 
 const Container = styled.div`
@@ -292,6 +293,9 @@ export default function ProviderDashboard() {
 
   return (
     <Container>
+      {/* Odoo Sync Panel */}
+      <OdooSyncPanel />
+
       {/* Summary Cards */}
       <SummaryGrid>
         <SummaryCard

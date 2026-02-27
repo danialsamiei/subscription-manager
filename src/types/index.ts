@@ -60,7 +60,8 @@ export type ProviderType =
   | 'render'
   | 'slack'
   | 'titanmail'
-  | 'atakdomain';
+  | 'atakdomain'
+  | 'odoo';
 
 export interface Provider {
   id?: number;

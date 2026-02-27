@@ -15,6 +15,7 @@ import { AnthropicProvider } from './anthropic';
 import { DeepSeekProvider } from './deepseek';
 import { GoogleProvider } from './google';
 import { AtakDomainProvider } from './atakdomain';
+import { OdooProvider } from './odoo';
 import {
   createGrokProvider,
   createPerplexityProvider,
@@ -61,6 +62,9 @@ const providerRegistry: Record<string, () => ProviderInterface> = {
   slack: () => createSlackProvider(),
   titanmail: () => createTitanMailProvider(),
   googleworkspace: () => createGoogleWorkspaceProvider(),
+
+  // ERP & Business
+  odoo: () => new OdooProvider(),
 };
 
 export function createProvider(type: string): ProviderInterface | null {
