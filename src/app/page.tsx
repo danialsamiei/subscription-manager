@@ -13,6 +13,7 @@ import { faCog } from '@fortawesome/free-solid-svg-icons';
 import ConfigurationModal from '@/components/ConfigurationModal';
 import CostTrendGraph from '@/components/CostTrendGraph';
 import CompositionCharts from '@/components/CompositionCharts';
+import Link from 'next/link';
 
 export default function Home() {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
@@ -316,6 +317,14 @@ export default function Home() {
               className="import-input"
             />
           </label>
+
+          {/* Domain Tracker Button */}
+          <Link href="/providers" style={{ textDecoration: 'none' }}>
+            <button className="config-button" data-label="Domains" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Icon icon="mdi:earth" />
+              Domains
+            </button>
+          </Link>
 
           {/* Configuration Button */}
           <button
