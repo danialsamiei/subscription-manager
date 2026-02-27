@@ -162,6 +162,7 @@ const credentialFields: Record<string, Array<{ key: string; label: string; type:
   digitalocean: [{ key: 'api_token', label: 'Personal Access Token', type: 'api_token' }],
   nsup: defaultLoginFields,
   spadserver: defaultLoginFields,
+  atakdomain: defaultLoginFields,
 
   // AI Development Platforms
   replit: [{ key: 'api_key', label: 'Session Cookie / API Key', type: 'api_key' }],
@@ -253,7 +254,7 @@ export default function ProviderConfigModal({ provider, onClose, onSave }: Props
       const result = await response.json();
       setTestResult(result);
     } catch (error) {
-      setTestResult({ success: false, message: 'Connection test failed' });
+      setTestResult({ success: false, message: 'تست اتصال ناموفق بود' });
     } finally {
       setIsTesting(false);
     }
@@ -268,27 +269,27 @@ export default function ProviderConfigModal({ provider, onClose, onSave }: Props
       >
         <Title>
           <Icon icon={provider.icon || 'mdi:cloud'} style={{ color: provider.color, fontSize: '1.5rem' }} />
-          {provider.name} Configuration
+          تنظیمات {provider.name}
         </Title>
 
         <FormGroup>
-          <Label>Provider Type</Label>
+          <Label>نوع سرویس‌دهنده</Label>
           <Input value={provider.type} disabled />
         </FormGroup>
 
         <FormGroup>
-          <Label>Auth Method</Label>
+          <Label>روش احراز هویت</Label>
           <Input value={provider.authMethod || (provider as any).auth_method || 'manual'} disabled />
         </FormGroup>
 
         <Section>
-          <SectionTitle>Credentials</SectionTitle>
+          <SectionTitle>اعتبارنامه‌ها</SectionTitle>
           {fields.map((field) => (
             <FormGroup key={field.key}>
               <Label>{field.label}</Label>
               <Input
                 type={field.type === 'password' ? 'password' : 'text'}
-                placeholder={`Enter ${field.label}`}
+                placeholder={`${field.label} را وارد کنید`}
                 value={credentials[field.key] || ''}
                 onChange={(e) => setCredentials(prev => ({
                   ...prev,
@@ -310,14 +311,14 @@ export default function ProviderConfigModal({ provider, onClose, onSave }: Props
         </Section>
 
         <ButtonRow>
-          <Button onClick={onClose}>Cancel</Button>
+          <Button onClick={onClose}>لغو</Button>
           <Button $variant="test" onClick={handleTest} disabled={isTesting}>
             <Icon icon="mdi:connection" />
-            {isTesting ? 'Testing...' : 'Test'}
+            {isTesting ? 'در حال تست...' : 'تست اتصال'}
           </Button>
           <Button $variant="primary" onClick={handleSaveCredentials} disabled={isSaving}>
             <Icon icon="mdi:content-save" />
-            {isSaving ? 'Saving...' : 'Save'}
+            {isSaving ? 'در حال ذخیره...' : 'ذخیره'}
           </Button>
         </ButtonRow>
       </Modal>

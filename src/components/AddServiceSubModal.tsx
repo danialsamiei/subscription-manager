@@ -144,10 +144,10 @@ export default function AddServiceSubModal({ providers, onClose, onSave }: Props
   return (
     <Overlay onClick={onClose}>
       <Modal onClick={(e) => e.stopPropagation()} initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }}>
-        <Title>Add Service Subscription</Title>
+        <Title>افزودن اشتراک سرویس</Title>
         <form onSubmit={handleSubmit}>
           <FormGroup>
-            <Label>Provider</Label>
+            <Label>سرویس‌دهنده</Label>
             <Select value={form.provider_id} onChange={e => setForm({ ...form, provider_id: e.target.value })}>
               {providers.map(p => (
                 <option key={p.id} value={p.id}>{p.name}</option>
@@ -156,10 +156,10 @@ export default function AddServiceSubModal({ providers, onClose, onSave }: Props
           </FormGroup>
 
           <FormGroup>
-            <Label>Service Name *</Label>
+            <Label>نام سرویس *</Label>
             <Input
               required
-              placeholder="e.g., Cloudflare Pro, DigitalOcean Droplet"
+              placeholder="مثلا Cloudflare Pro، DigitalOcean Droplet"
               value={form.service_name}
               onChange={e => setForm({ ...form, service_name: e.target.value })}
             />
@@ -167,30 +167,30 @@ export default function AddServiceSubModal({ providers, onClose, onSave }: Props
 
           <Row>
             <FormGroup>
-              <Label>Plan Name</Label>
+              <Label>نام پلن</Label>
               <Input
-                placeholder="e.g., Pro, Business"
+                placeholder="مثلا Pro، Business"
                 value={form.plan_name}
                 onChange={e => setForm({ ...form, plan_name: e.target.value })}
               />
             </FormGroup>
             <FormGroup>
-              <Label>Status</Label>
+              <Label>وضعیت</Label>
               <Select value={form.status} onChange={e => setForm({ ...form, status: e.target.value })}>
-                <option value="active">Active</option>
-                <option value="trial">Trial</option>
-                <option value="expiring_soon">Expiring Soon</option>
-                <option value="expired">Expired</option>
-                <option value="cancelled">Cancelled</option>
-                <option value="paused">Paused</option>
-                <option value="unknown">Unknown</option>
+                <option value="active">فعال</option>
+                <option value="trial">آزمایشی</option>
+                <option value="expiring_soon">رو به انقضا</option>
+                <option value="expired">منقضی</option>
+                <option value="cancelled">لغو شده</option>
+                <option value="paused">متوقف</option>
+                <option value="unknown">نامشخص</option>
               </Select>
             </FormGroup>
           </Row>
 
           <Row>
             <FormGroup>
-              <Label>Start Date</Label>
+              <Label>تاریخ شروع</Label>
               <Input
                 type="date"
                 value={form.start_date}
@@ -198,7 +198,7 @@ export default function AddServiceSubModal({ providers, onClose, onSave }: Props
               />
             </FormGroup>
             <FormGroup>
-              <Label>Expiry Date</Label>
+              <Label>تاریخ انقضا</Label>
               <Input
                 type="date"
                 value={form.expiry_date}
@@ -209,7 +209,7 @@ export default function AddServiceSubModal({ providers, onClose, onSave }: Props
 
           <Row>
             <FormGroup>
-              <Label>Renewal Cost</Label>
+              <Label>هزینه تمدید</Label>
               <Input
                 type="number"
                 step="0.01"
@@ -219,7 +219,7 @@ export default function AddServiceSubModal({ providers, onClose, onSave }: Props
               />
             </FormGroup>
             <FormGroup>
-              <Label>Currency</Label>
+              <Label>ارز</Label>
               <Select value={form.renewal_currency} onChange={e => setForm({ ...form, renewal_currency: e.target.value })}>
                 <option value="USD">USD</option>
                 <option value="EUR">EUR</option>
@@ -232,20 +232,20 @@ export default function AddServiceSubModal({ providers, onClose, onSave }: Props
           </Row>
 
           <FormGroup>
-            <Label>Billing Cycle</Label>
+            <Label>دوره صورتحساب</Label>
             <Select value={form.billing_cycle} onChange={e => setForm({ ...form, billing_cycle: e.target.value })}>
-              <option value="monthly">Monthly</option>
-              <option value="yearly">Yearly</option>
-              <option value="weekly">Weekly</option>
-              <option value="one_time">One-time</option>
-              <option value="custom">Custom</option>
+              <option value="monthly">ماهانه</option>
+              <option value="yearly">سالانه</option>
+              <option value="weekly">هفتگی</option>
+              <option value="one_time">یکبار</option>
+              <option value="custom">سفارشی</option>
             </Select>
           </FormGroup>
 
           <FormGroup>
-            <Label>Payment Method</Label>
+            <Label>روش پرداخت</Label>
             <Input
-              placeholder="e.g., Mastercard ending 1234"
+              placeholder="مثلا مسترکارت با انتهای ۱۲۳۴"
               value={form.payment_method}
               onChange={e => setForm({ ...form, payment_method: e.target.value })}
             />
@@ -259,7 +259,7 @@ export default function AddServiceSubModal({ providers, onClose, onSave }: Props
                   checked={form.auto_renew}
                   onChange={e => setForm({ ...form, auto_renew: e.target.checked })}
                 />
-                Auto-Renew
+                تمدید خودکار
               </CheckboxLabel>
             </FormGroup>
             <FormGroup>
@@ -269,23 +269,23 @@ export default function AddServiceSubModal({ providers, onClose, onSave }: Props
                   checked={form.has_active_payment_method}
                   onChange={e => setForm({ ...form, has_active_payment_method: e.target.checked })}
                 />
-                Active Payment Method
+                روش پرداخت فعال
               </CheckboxLabel>
             </FormGroup>
           </Row>
 
           <FormGroup>
-            <Label>Notes</Label>
+            <Label>یادداشت</Label>
             <Input
-              placeholder="Optional notes..."
+              placeholder="یادداشت اختیاری..."
               value={form.notes}
               onChange={e => setForm({ ...form, notes: e.target.value })}
             />
           </FormGroup>
 
           <ButtonRow>
-            <Button type="button" onClick={onClose}>Cancel</Button>
-            <Button type="submit" $variant="primary">Add Subscription</Button>
+            <Button type="button" onClick={onClose}>لغو</Button>
+            <Button type="submit" $variant="primary">افزودن اشتراک</Button>
           </ButtonRow>
         </form>
       </Modal>

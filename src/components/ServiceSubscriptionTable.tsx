@@ -182,13 +182,13 @@ export default function ServiceSubscriptionTable({ subscriptions, rates, onDelet
   return (
     <Table>
       <HeaderRow>
-        <div>Service</div>
-        <div>Provider</div>
-        <div>Expiry Date</div>
-        <div>Status</div>
-        <div>Auto-Renew / Payment</div>
-        <div>Cost</div>
-        <div>Actions</div>
+        <div>سرویس</div>
+        <div>سرویس‌دهنده</div>
+        <div>تاریخ انقضا</div>
+        <div>وضعیت</div>
+        <div>تمدید خودکار / پرداخت</div>
+        <div>هزینه</div>
+        <div>عملیات</div>
       </HeaderRow>
 
       {subscriptions.map((sub: any) => {
@@ -199,11 +199,11 @@ export default function ServiceSubscriptionTable({ subscriptions, rates, onDelet
 
         return (
           <Row key={sub.id} $status={status}>
-            <Cell data-label="Service">
+            <Cell data-label="سرویس">
               <ServiceName>{sub.service_name}</ServiceName>
               {sub.plan_name && (
                 <div style={{ fontSize: '0.75rem', color: '#888' }}>
-                  Plan: {sub.plan_name}
+                  پلن: {sub.plan_name}
                 </div>
               )}
               {sub.notes && (
@@ -213,14 +213,14 @@ export default function ServiceSubscriptionTable({ subscriptions, rates, onDelet
               )}
             </Cell>
 
-            <Cell data-label="Provider">
+            <Cell data-label="سرویس‌دهنده">
               <ProviderBadge $color={sub.provider_color}>
                 <Icon icon={sub.provider_icon || 'mdi:cloud'} style={{ fontSize: '1rem' }} />
                 {sub.provider_name}
               </ProviderBadge>
             </Cell>
 
-            <Cell data-label="Expiry">
+            <Cell data-label="تاریخ انقضا">
               {sub.expiry_date ? (
                 <DateDisplay>
                   <div>{formatGregorianDate(sub.expiry_date)}</div>
@@ -231,18 +231,25 @@ export default function ServiceSubscriptionTable({ subscriptions, rates, onDelet
                   {sub.days_until_expiry !== null && (
                     <div style={{ fontSize: '0.7rem', color: sub.days_until_expiry <= 30 ? '#FF9800' : '#888' }}>
                       {sub.days_until_expiry > 0
-                        ? `${sub.days_until_expiry} days remaining`
-                        : `Expired ${Math.abs(sub.days_until_expiry)} days ago`}
+                        ? `${sub.days_until_expiry} روز باقیمانده`
+                        : `${Math.abs(sub.days_until_expiry)} روز پیش منقضی شده`}
                     </div>
                   )}
                 </DateDisplay>
               ) : (
-                <span style={{ color: '#666' }}>Ongoing</span>
+                <span style={{ color: '#666' }}>جاری</span>
               )}
             </Cell>
 
-            <Cell data-label="Status">
-              <StatusBadge $status={status}>{status.replace('_', ' ')}</StatusBadge>
+            <Cell data-label="وضعیت">
+              <StatusBadge $status={status}>
+                {status === 'active' ? 'فعال'
+                  : status === 'expiring_soon' ? 'رو به انقضا'
+                  : status === 'expired' ? 'منقضی'
+                  : status === 'trial' ? 'آزمایشی'
+                  : status === 'cancelled' ? 'لغو شده'
+                  : status.replace('_', ' ')}
+              </StatusBadge>
               {sub.billing_cycle && (
                 <div style={{ marginTop: '4px' }}>
                   <BillingBadge>{sub.billing_cycle}</BillingBadge>
@@ -250,22 +257,22 @@ export default function ServiceSubscriptionTable({ subscriptions, rates, onDelet
               )}
             </Cell>
 
-            <Cell data-label="Auto-Renew / Payment">
+            <Cell data-label="تمدید خودکار / پرداخت">
               <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                 <InfoBadge $active={sub.auto_renew}>
                   <Icon icon={sub.auto_renew ? 'mdi:autorenew' : 'mdi:close'} style={{ fontSize: '0.8rem' }} />
-                  {sub.auto_renew ? 'Auto-Renew' : 'Manual'}
+                  {sub.auto_renew ? 'تمدید خودکار' : 'دستی'}
                 </InfoBadge>
                 <InfoBadge $active={sub.has_active_payment_method}>
                   <Icon icon="mdi:credit-card" style={{ fontSize: '0.8rem' }} />
                   {sub.has_active_payment_method
-                    ? (sub.payment_method || 'Active')
-                    : 'No Payment'}
+                    ? (sub.payment_method || 'فعال')
+                    : 'بدون پرداخت'}
                 </InfoBadge>
               </div>
             </Cell>
 
-            <Cell data-label="Cost">
+            <Cell data-label="هزینه">
               {sub.renewal_cost ? (
                 <CostDisplay>
                   <div>
@@ -278,11 +285,11 @@ export default function ServiceSubscriptionTable({ subscriptions, rates, onDelet
                   {tomanAmount && <TomanCost>{formatToman(tomanAmount)}</TomanCost>}
                 </CostDisplay>
               ) : (
-                <span style={{ color: '#666' }}>Free</span>
+                <span style={{ color: '#666' }}>رایگان</span>
               )}
             </Cell>
 
-            <Cell data-label="Actions">
+            <Cell data-label="عملیات">
               <DeleteButton onClick={() => onDelete(sub.id)}>
                 <Icon icon="mdi:delete" style={{ fontSize: '1.2rem' }} />
               </DeleteButton>

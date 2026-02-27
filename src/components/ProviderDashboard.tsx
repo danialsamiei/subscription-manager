@@ -284,7 +284,7 @@ export default function ProviderDashboard() {
     return (
       <Container>
         <div style={{ textAlign: 'center', padding: '3rem', color: '#999' }}>
-          Loading dashboard...
+          در حال بارگذاری داشبورد...
         </div>
       </Container>
     );
@@ -301,9 +301,9 @@ export default function ProviderDashboard() {
           transition={{ delay: 0 }}
         >
           <SummaryValue>{summary?.totalDomains || 0}</SummaryValue>
-          <SummaryLabel>Total Domains</SummaryLabel>
+          <SummaryLabel>کل دامنه‌ها</SummaryLabel>
           <SummarySubValue>
-            {summary?.activeDomains || 0} active / {summary?.expiringDomains || 0} expiring
+            {summary?.activeDomains || 0} فعال / {summary?.expiringDomains || 0} رو به انقضا
           </SummarySubValue>
         </SummaryCard>
 
@@ -314,9 +314,9 @@ export default function ProviderDashboard() {
           transition={{ delay: 0.1 }}
         >
           <SummaryValue>{summary?.totalSubscriptions || 0}</SummaryValue>
-          <SummaryLabel>Service Subscriptions</SummaryLabel>
+          <SummaryLabel>اشتراک‌های سرویس</SummaryLabel>
           <SummarySubValue>
-            {summary?.activeSubscriptions || 0} active / {summary?.expiringSubscriptions || 0} expiring
+            {summary?.activeSubscriptions || 0} فعال / {summary?.expiringSubscriptions || 0} رو به انقضا
           </SummarySubValue>
         </SummaryCard>
 
@@ -328,7 +328,7 @@ export default function ProviderDashboard() {
         >
           <CostDisplay>
             <SummaryValue>${summary?.totalMonthlyCostUSD?.toFixed(2) || '0.00'}</SummaryValue>
-            <SummaryLabel>Monthly Cost (USD)</SummaryLabel>
+            <SummaryLabel>هزینه ماهانه (دلار)</SummaryLabel>
             <SummarySubValue>
               {summary?.totalMonthlyCostToman ? formatToman(summary.totalMonthlyCostToman) : '۰ تومان'}
             </SummarySubValue>
@@ -342,9 +342,9 @@ export default function ProviderDashboard() {
           transition={{ delay: 0.3 }}
         >
           <SummaryValue>{summary?.expiredDomains || 0}</SummaryValue>
-          <SummaryLabel>Expired Domains</SummaryLabel>
+          <SummaryLabel>دامنه‌های منقضی</SummaryLabel>
           <SummarySubValue>
-            {summary?.providers?.filter(p => p.is_active).length || 0} providers active
+            {summary?.providers?.filter(p => p.is_active).length || 0} سرویس‌دهنده فعال
           </SummarySubValue>
         </SummaryCard>
       </SummaryGrid>
@@ -353,14 +353,14 @@ export default function ProviderDashboard() {
       <SectionHeader>
         <SectionTitle>
           <Icon icon="mdi:cloud-outline" style={{ fontSize: '1.5rem' }} />
-          Providers
+          سرویس‌دهنده‌ها
         </SectionTitle>
         <ButtonGroup>
           <ActionButton onClick={handleRefreshRates}>
-            <Icon icon="mdi:currency-usd" /> Refresh Rates
+            <Icon icon="mdi:currency-usd" /> بروزرسانی نرخ ارز
           </ActionButton>
           <ActionButton onClick={handleSyncAll}>
-            <Icon icon="mdi:sync" /> Sync All
+            <Icon icon="mdi:sync" /> همگام‌سازی همه
           </ActionButton>
         </ButtonGroup>
       </SectionHeader>
@@ -389,13 +389,13 @@ export default function ProviderDashboard() {
               </ProviderHeader>
               <ProviderMeta>
                 {provider.auth_method === 'api_key' && <MetaBadge $variant="api">API</MetaBadge>}
-                {provider.auth_method === 'login_2fa' && <MetaBadge $variant="manual">2FA Login</MetaBadge>}
-                {provider.auth_method === 'manual' && <MetaBadge $variant="manual">Manual</MetaBadge>}
+                {provider.auth_method === 'login_2fa' && <MetaBadge $variant="manual">ورود دومرحله‌ای</MetaBadge>}
+                {provider.auth_method === 'manual' && <MetaBadge $variant="manual">دستی</MetaBadge>}
                 <MetaBadge $variant="domains">
-                  {domains.filter((d: any) => d.provider_id === provider.id).length} domains
+                  {domains.filter((d: any) => d.provider_id === provider.id).length} دامنه
                 </MetaBadge>
                 <MetaBadge $variant="subs">
-                  {serviceSubscriptions.filter((s: any) => s.provider_id === provider.id).length} subs
+                  {serviceSubscriptions.filter((s: any) => s.provider_id === provider.id).length} اشتراک
                 </MetaBadge>
               </ProviderMeta>
               <div style={{ marginTop: '0.75rem', display: 'flex', gap: '0.5rem' }}>
@@ -408,12 +408,12 @@ export default function ProviderDashboard() {
                   style={{ padding: '4px 10px', fontSize: '0.75rem' }}
                 >
                   <Icon icon={syncingProviders.has(provider.id) ? 'mdi:loading' : 'mdi:sync'} />
-                  {syncingProviders.has(provider.id) ? 'Syncing...' : 'Sync'}
+                  {syncingProviders.has(provider.id) ? 'در حال همگام‌سازی...' : 'همگام‌سازی'}
                 </ActionButton>
               </div>
               {provider.last_sync && (
                 <div style={{ fontSize: '0.7rem', color: '#666', marginTop: '0.5rem' }}>
-                  Last sync: {new Date(provider.last_sync).toLocaleString()}
+                  آخرین همگام‌سازی: {new Date(provider.last_sync).toLocaleString()}
                 </div>
               )}
             </ProviderCard>
@@ -425,10 +425,10 @@ export default function ProviderDashboard() {
       <SectionHeader>
         <SectionTitle>
           <Icon icon="mdi:earth" style={{ fontSize: '1.5rem' }} />
-          Domains
+          دامنه‌ها
         </SectionTitle>
         <ActionButton onClick={() => setIsAddDomainOpen(true)}>
-          <Icon icon="mdi:plus" /> Add Domain
+          <Icon icon="mdi:plus" /> افزودن دامنه
         </ActionButton>
       </SectionHeader>
 
@@ -440,7 +440,7 @@ export default function ProviderDashboard() {
         />
       ) : (
         <EmptyState>
-          No domains tracked yet. Add domains manually or sync from a provider.
+          هنوز دامنه‌ای ثبت نشده. دامنه‌ها را دستی اضافه کنید یا از سرویس‌دهنده همگام‌سازی کنید.
         </EmptyState>
       )}
 
@@ -448,10 +448,10 @@ export default function ProviderDashboard() {
       <SectionHeader>
         <SectionTitle>
           <Icon icon="mdi:card-account-details-outline" style={{ fontSize: '1.5rem' }} />
-          Service Subscriptions
+          اشتراک‌های سرویس
         </SectionTitle>
         <ActionButton onClick={() => setIsAddSubOpen(true)}>
-          <Icon icon="mdi:plus" /> Add Subscription
+          <Icon icon="mdi:plus" /> افزودن اشتراک
         </ActionButton>
       </SectionHeader>
 
@@ -463,7 +463,7 @@ export default function ProviderDashboard() {
         />
       ) : (
         <EmptyState>
-          No service subscriptions tracked yet. Add subscriptions manually or sync from a provider.
+          هنوز اشتراکی ثبت نشده. اشتراک‌ها را دستی اضافه کنید یا از سرویس‌دهنده همگام‌سازی کنید.
         </EmptyState>
       )}
 

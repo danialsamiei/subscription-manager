@@ -18,8 +18,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: 'Subscription Manager',
-  description: 'Manage your subscriptions in one place',
+  title: 'مدیریت اشتراک‌ها و دامنه‌ها',
+  description: 'مدیریت یکپارچه اشتراک‌ها، دامنه‌ها و سرویس‌های ابری',
   icons: {
     icon: [
       { url: '/favicon.ico' },
@@ -45,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="fa" dir="rtl">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />

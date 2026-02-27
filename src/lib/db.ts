@@ -206,6 +206,7 @@ async function seedDefaultProviders(db: any) {
     { name: 'DigitalOcean', type: 'digitalocean', icon: 'simple-icons:digitalocean', color: '#0080FF', api_endpoint: 'https://api.digitalocean.com/v2', auth_method: 'api_key' },
     { name: 'NSUP.com', type: 'nsup', icon: 'mdi:server', color: '#2196F3', api_endpoint: 'https://nsup.com', auth_method: 'login_2fa' },
     { name: 'SpadServer Cloud', type: 'spadserver', icon: 'mdi:cloud-outline', color: '#7C4DFF', api_endpoint: 'https://spadserver.com', auth_method: 'login_2fa' },
+    { name: 'Atak Domain', type: 'atakdomain', icon: 'mdi:domain', color: '#E53935', api_endpoint: 'https://www.atakdomain.com.tr', auth_method: 'login_2fa' },
 
     // AI Development Platforms
     { name: 'Replit', type: 'replit', icon: 'simple-icons:replit', color: '#F26207', api_endpoint: 'https://replit.com', auth_method: 'login_2fa' },

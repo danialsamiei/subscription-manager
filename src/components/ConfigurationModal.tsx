@@ -93,22 +93,22 @@ function ConfigurationModal({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <h2>Configuration</h2>
+        <h2>تنظیمات</h2>
         <form onSubmit={handleSubmit} className={styles.modalForm}>
           <div className={styles.configSection}>
-            <h3>Currency Settings</h3>
+            <h3>تنظیمات ارز</h3>
             <div className={styles.formGroup}>
-              <label htmlFor="currency-search">Search Currency</label>
+              <label htmlFor="currency-search">جستجوی ارز</label>
               <input
                 id="currency-search"
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search by currency code or name"
+                placeholder="جستجو بر اساس کد یا نام ارز"
               />
             </div>
             <div className={styles.formGroup}>
-              <label htmlFor="currency">Currency</label>
+              <label htmlFor="currency">ارز</label>
               <select
                 id="currency"
                 value={selectedCurrency}
@@ -140,8 +140,8 @@ function ConfigurationModal({
                 </div>
                 <span style={{ paddingLeft: '10px' }}>
                   {selectedShowCurrencySymbol 
-                    ? `Symbol (${getSymbolFromCurrency(selectedCurrency) || 'N/A'})` 
-                    : `Code (${selectedCurrency})`
+                    ? `نماد (${getSymbolFromCurrency(selectedCurrency) || 'N/A'})`
+                    : `کد (${selectedCurrency})`
                   }
                 </span>
               </label>
@@ -149,43 +149,43 @@ function ConfigurationModal({
           </div>
           
           <div className={styles.configSection}>
-            <h3>Notification Settings</h3>
+            <h3>تنظیمات اعلان</h3>
             <div className={styles.formGroup}>
-              <label htmlFor="ntfyTopic">NTFY Topic</label>
+              <label htmlFor="ntfyTopic">موضوع NTFY</label>
               <input
                 id="ntfyTopic"
                 type="text"
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
-                placeholder="Enter your NTFY topic"
+                placeholder="موضوع NTFY خود را وارد کنید"
               />
             </div>
             <div className={styles.formGroup}>
-              <label htmlFor="ntfyDomain">NTFY Domain</label>
+              <label htmlFor="ntfyDomain">دامنه NTFY</label>
               <input
                 id="ntfyDomain"
                 type="text"
                 value={domain}
                 onChange={(e) => setDomain(e.target.value)}
-                placeholder="Enter your NTFY domain"
+                placeholder="دامنه NTFY خود را وارد کنید"
               />
             </div>
             <button type="button" onClick={handleTestNtfy} className={styles.testButton}>
-              Test NTFY
+              تست NTFY
             </button>
             {testStatus && (
               <p className={`${styles.testStatus} ${styles[testStatus]}`}>
-                {testStatus === 'success' ? 'Test notification sent successfully!' : 'Failed to send test notification.'}
+                {testStatus === 'success' ? 'اعلان تست با موفقیت ارسال شد!' : 'ارسال اعلان تست ناموفق بود.'}
               </p>
             )}
           </div>
           
           <div className={styles.modalActions}>
             <button type="submit" className={styles.submitButton}>
-              Save
+              ذخیره
             </button>
             <button type="button" onClick={onClose} className={styles.cancelButton}>
-              Cancel
+              لغو
             </button>
           </div>
         </form>

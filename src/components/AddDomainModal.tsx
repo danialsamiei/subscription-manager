@@ -147,10 +147,10 @@ export default function AddDomainModal({ providers, onClose, onSave }: Props) {
   return (
     <Overlay onClick={onClose}>
       <Modal onClick={(e) => e.stopPropagation()} initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }}>
-        <Title>Add Domain</Title>
+        <Title>افزودن دامنه</Title>
         <form onSubmit={handleSubmit}>
           <FormGroup>
-            <Label>Provider</Label>
+            <Label>سرویس‌دهنده</Label>
             <Select value={form.provider_id} onChange={e => setForm({ ...form, provider_id: e.target.value })}>
               {providers.map(p => (
                 <option key={p.id} value={p.id}>{p.name}</option>
@@ -159,7 +159,7 @@ export default function AddDomainModal({ providers, onClose, onSave }: Props) {
           </FormGroup>
 
           <FormGroup>
-            <Label>Domain Name *</Label>
+            <Label>نام دامنه *</Label>
             <Input
               required
               placeholder="example.com"
@@ -170,17 +170,17 @@ export default function AddDomainModal({ providers, onClose, onSave }: Props) {
 
           <Row>
             <FormGroup>
-              <Label>Registrar</Label>
+              <Label>ثبت‌کننده</Label>
               <Input
-                placeholder="e.g., Cloudflare"
+                placeholder="مثلا Cloudflare"
                 value={form.registrar}
                 onChange={e => setForm({ ...form, registrar: e.target.value })}
               />
             </FormGroup>
             <FormGroup>
-              <Label>DNS Provider</Label>
+              <Label>سرویس‌دهنده DNS</Label>
               <Input
-                placeholder="e.g., Cloudflare"
+                placeholder="مثلا Cloudflare"
                 value={form.dns_provider}
                 onChange={e => setForm({ ...form, dns_provider: e.target.value })}
               />
@@ -189,7 +189,7 @@ export default function AddDomainModal({ providers, onClose, onSave }: Props) {
 
           <Row>
             <FormGroup>
-              <Label>Expiry Date</Label>
+              <Label>تاریخ انقضا</Label>
               <Input
                 type="date"
                 value={form.expiry_date}
@@ -197,20 +197,20 @@ export default function AddDomainModal({ providers, onClose, onSave }: Props) {
               />
             </FormGroup>
             <FormGroup>
-              <Label>Status</Label>
+              <Label>وضعیت</Label>
               <Select value={form.status} onChange={e => setForm({ ...form, status: e.target.value })}>
-                <option value="active">Active</option>
-                <option value="expiring_soon">Expiring Soon</option>
-                <option value="expired">Expired</option>
-                <option value="pending">Pending</option>
-                <option value="unknown">Unknown</option>
+                <option value="active">فعال</option>
+                <option value="expiring_soon">رو به انقضا</option>
+                <option value="expired">منقضی</option>
+                <option value="pending">در انتظار</option>
+                <option value="unknown">نامشخص</option>
               </Select>
             </FormGroup>
           </Row>
 
           <Row>
             <FormGroup>
-              <Label>Renewal Cost</Label>
+              <Label>هزینه تمدید</Label>
               <Input
                 type="number"
                 step="0.01"
@@ -220,7 +220,7 @@ export default function AddDomainModal({ providers, onClose, onSave }: Props) {
               />
             </FormGroup>
             <FormGroup>
-              <Label>Currency</Label>
+              <Label>ارز</Label>
               <Select value={form.renewal_currency} onChange={e => setForm({ ...form, renewal_currency: e.target.value })}>
                 <option value="USD">USD</option>
                 <option value="EUR">EUR</option>
@@ -233,9 +233,9 @@ export default function AddDomainModal({ providers, onClose, onSave }: Props) {
           </Row>
 
           <FormGroup>
-            <Label>Payment Method</Label>
+            <Label>روش پرداخت</Label>
             <Input
-              placeholder="e.g., Visa ending 4242"
+              placeholder="مثلا ویزا با انتهای ۴۲۴۲"
               value={form.payment_method}
               onChange={e => setForm({ ...form, payment_method: e.target.value })}
             />
@@ -243,16 +243,16 @@ export default function AddDomainModal({ providers, onClose, onSave }: Props) {
 
           <Row>
             <FormGroup>
-              <Label>SSL Status</Label>
+              <Label>وضعیت SSL</Label>
               <Select value={form.ssl_status} onChange={e => setForm({ ...form, ssl_status: e.target.value })}>
-                <option value="none">None</option>
-                <option value="active">Active</option>
-                <option value="expired">Expired</option>
-                <option value="pending">Pending</option>
+                <option value="none">ندارد</option>
+                <option value="active">فعال</option>
+                <option value="expired">منقضی</option>
+                <option value="pending">در انتظار</option>
               </Select>
             </FormGroup>
             <FormGroup>
-              <Label>SSL Expiry</Label>
+              <Label>تاریخ انقضای SSL</Label>
               <Input
                 type="date"
                 value={form.ssl_expiry}
@@ -262,7 +262,7 @@ export default function AddDomainModal({ providers, onClose, onSave }: Props) {
           </Row>
 
           <FormGroup>
-            <Label>Nameservers</Label>
+            <Label>نیم‌سرورها</Label>
             <Input
               placeholder="ns1.example.com, ns2.example.com"
               value={form.nameservers}
@@ -278,7 +278,7 @@ export default function AddDomainModal({ providers, onClose, onSave }: Props) {
                   checked={form.auto_renew}
                   onChange={e => setForm({ ...form, auto_renew: e.target.checked })}
                 />
-                Auto-Renew
+                تمدید خودکار
               </CheckboxLabel>
             </FormGroup>
             <FormGroup>
@@ -288,23 +288,23 @@ export default function AddDomainModal({ providers, onClose, onSave }: Props) {
                   checked={form.has_active_payment_method}
                   onChange={e => setForm({ ...form, has_active_payment_method: e.target.checked })}
                 />
-                Active Payment Method
+                روش پرداخت فعال
               </CheckboxLabel>
             </FormGroup>
           </Row>
 
           <FormGroup>
-            <Label>Notes</Label>
+            <Label>یادداشت</Label>
             <Input
-              placeholder="Optional notes..."
+              placeholder="یادداشت اختیاری..."
               value={form.notes}
               onChange={e => setForm({ ...form, notes: e.target.value })}
             />
           </FormGroup>
 
           <ButtonRow>
-            <Button type="button" onClick={onClose}>Cancel</Button>
-            <Button type="submit" $variant="primary">Add Domain</Button>
+            <Button type="button" onClick={onClose}>لغو</Button>
+            <Button type="submit" $variant="primary">افزودن دامنه</Button>
           </ButtonRow>
         </form>
       </Modal>

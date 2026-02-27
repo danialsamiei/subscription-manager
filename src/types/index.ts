@@ -59,7 +59,8 @@ export type ProviderType =
   | 'googleworkspace'
   | 'render'
   | 'slack'
-  | 'titanmail';
+  | 'titanmail'
+  | 'atakdomain';
 
 export interface Provider {
   id?: number;

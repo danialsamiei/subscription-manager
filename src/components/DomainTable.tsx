@@ -168,13 +168,13 @@ export default function DomainTable({ domains, rates, onDelete }: Props) {
   return (
     <Table>
       <HeaderRow>
-        <div>Domain</div>
-        <div>Provider</div>
-        <div>Expiry Date</div>
-        <div>Status</div>
-        <div>Auto-Renew / Payment</div>
-        <div>Renewal Cost</div>
-        <div>Actions</div>
+        <div>دامنه</div>
+        <div>سرویس‌دهنده</div>
+        <div>تاریخ انقضا</div>
+        <div>وضعیت</div>
+        <div>تمدید خودکار / پرداخت</div>
+        <div>هزینه تمدید</div>
+        <div>عملیات</div>
       </HeaderRow>
 
       {domains.map((domain: any) => {
@@ -185,10 +185,10 @@ export default function DomainTable({ domains, rates, onDelete }: Props) {
 
         return (
           <Row key={domain.id} $status={status}>
-            <Cell data-label="Domain">
+            <Cell data-label="دامنه">
               <DomainName>{domain.domain_name}</DomainName>
               <div style={{ fontSize: '0.7rem', color: '#888' }}>
-                {domain.registrar || 'Unknown registrar'}
+                {domain.registrar || 'ثبات نامشخص'}
               </div>
               {domain.dns_provider && (
                 <div style={{ fontSize: '0.7rem', color: '#666' }}>
@@ -197,14 +197,14 @@ export default function DomainTable({ domains, rates, onDelete }: Props) {
               )}
             </Cell>
 
-            <Cell data-label="Provider">
+            <Cell data-label="سرویس‌دهنده">
               <ProviderBadge $color={domain.provider_color}>
                 <Icon icon={domain.provider_icon || 'mdi:cloud'} style={{ fontSize: '1rem' }} />
                 {domain.provider_name}
               </ProviderBadge>
             </Cell>
 
-            <Cell data-label="Expiry">
+            <Cell data-label="تاریخ انقضا">
               {domain.expiry_date ? (
                 <DateDisplay>
                   <div>{formatGregorianDate(domain.expiry_date)}</div>
@@ -214,17 +214,17 @@ export default function DomainTable({ domains, rates, onDelete }: Props) {
                   </TimeDisplay>
                   <div style={{ fontSize: '0.7rem', color: domain.days_until_expiry <= 30 ? '#FF9800' : '#888' }}>
                     {domain.days_until_expiry > 0
-                      ? `${domain.days_until_expiry} days remaining`
-                      : `Expired ${Math.abs(domain.days_until_expiry)} days ago`}
+                      ? `${domain.days_until_expiry} روز باقیمانده`
+                      : `${Math.abs(domain.days_until_expiry)} روز پیش منقضی شده`}
                   </div>
                 </DateDisplay>
               ) : (
-                <span style={{ color: '#666' }}>N/A</span>
+                <span style={{ color: '#666' }}>نامشخص</span>
               )}
             </Cell>
 
-            <Cell data-label="Status">
-              <StatusBadge $status={status}>{status.replace('_', ' ')}</StatusBadge>
+            <Cell data-label="وضعیت">
+              <StatusBadge $status={status}>{status === 'active' ? 'فعال' : status === 'expiring_soon' ? 'رو به انقضا' : status === 'expired' ? 'منقضی' : status.replace('_', ' ')}</StatusBadge>
               {domain.ssl_status && (
                 <div style={{ marginTop: '4px' }}>
                   <InfoBadge $active={domain.ssl_status === 'active'}>
@@ -235,22 +235,22 @@ export default function DomainTable({ domains, rates, onDelete }: Props) {
               )}
             </Cell>
 
-            <Cell data-label="Auto-Renew / Payment">
+            <Cell data-label="تمدید خودکار / پرداخت">
               <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                 <InfoBadge $active={domain.auto_renew}>
                   <Icon icon={domain.auto_renew ? 'mdi:autorenew' : 'mdi:close'} style={{ fontSize: '0.8rem' }} />
-                  {domain.auto_renew ? 'Auto-Renew' : 'Manual'}
+                  {domain.auto_renew ? 'تمدید خودکار' : 'دستی'}
                 </InfoBadge>
                 <InfoBadge $active={domain.has_active_payment_method}>
                   <Icon icon="mdi:credit-card" style={{ fontSize: '0.8rem' }} />
                   {domain.has_active_payment_method
-                    ? (domain.payment_method || 'Active')
-                    : 'No Payment'}
+                    ? (domain.payment_method || 'فعال')
+                    : 'بدون پرداخت'}
                 </InfoBadge>
               </div>
             </Cell>
 
-            <Cell data-label="Renewal Cost">
+            <Cell data-label="هزینه تمدید">
               {domain.renewal_cost ? (
                 <CostDisplay>
                   <div>
@@ -262,11 +262,11 @@ export default function DomainTable({ domains, rates, onDelete }: Props) {
                   {tomanAmount && <TomanCost>{formatToman(tomanAmount)}</TomanCost>}
                 </CostDisplay>
               ) : (
-                <span style={{ color: '#666' }}>N/A</span>
+                <span style={{ color: '#666' }}>نامشخص</span>
               )}
             </Cell>
 
-            <Cell data-label="Actions">
+            <Cell data-label="عملیات">
               <DeleteButton onClick={() => onDelete(domain.id)}>
                 <Icon icon="mdi:delete" style={{ fontSize: '1.2rem' }} />
               </DeleteButton>

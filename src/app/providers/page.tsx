@@ -14,12 +14,12 @@ export default function ProvidersPage() {
   return (
     <div className="app">
       <div className="app-header">
-        <h1 className="app-title">Domain & Subscription Tracker</h1>
+        <h1 className="app-title">ردیاب دامنه‌ها و اشتراک‌ها</h1>
         <div className="header-actions">
           <Link href="/" style={{ textDecoration: 'none' }}>
             <button className="config-button" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Icon icon="mdi:arrow-left" />
-              Subscriptions
+              <Icon icon="mdi:arrow-right" />
+              اشتراک‌ها
             </button>
           </Link>
         </div>

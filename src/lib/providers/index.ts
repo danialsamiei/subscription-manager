@@ -14,6 +14,7 @@ import { GitHubProvider } from './github';
 import { AnthropicProvider } from './anthropic';
 import { DeepSeekProvider } from './deepseek';
 import { GoogleProvider } from './google';
+import { AtakDomainProvider } from './atakdomain';
 import {
   createGrokProvider,
   createPerplexityProvider,
@@ -37,6 +38,7 @@ const providerRegistry: Record<string, () => ProviderInterface> = {
   digitalocean: () => new DigitalOceanProvider(),
   nsup: () => createNsupProvider(),
   spadserver: () => createSpadServerProvider(),
+  atakdomain: () => new AtakDomainProvider(),
 
   // AI Development Platforms
   replit: () => new ReplitProvider(),
